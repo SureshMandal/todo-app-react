@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
+import "/src/index.css"
 
 const TodoApp = () => {
     const [todos, setTodos]=useState([])  /* printing the todos dynamically when user creates a todo*/
@@ -39,13 +40,16 @@ const TodoApp = () => {
     }
     
   return (
+    <>
+    
     <div className='container'>
+    <h1>TODO LIST</h1>
         {/* input start */}
-        <div className=" d-flex p-3">
+        <div className=" entertext ">
         <input 
         type="text" 
         value={input}
-        className="form-control border border-success" 
+        className="form-control border " 
         placeholder="enter todo..."
         onChange={(e)=>setInput(e.target.value)}
         />
@@ -59,7 +63,7 @@ const TodoApp = () => {
 
         {/* todolist items start */}
         
-            <div className=''>
+            <div className='output'>
             {
             todos.map(todo=>(
                 <li key={todo.id} className='list-group-item'>
@@ -80,19 +84,20 @@ const TodoApp = () => {
                      {/* buttons */}
                      {
                         editId===todo.id?(
-                            <button className='btn btn-success mx-2' onClick={()=>SaveEdit(todo.id,todo.text)}>save</button>
+                            <button className='btn btn-success mx-1 my-2' onClick={()=>SaveEdit(todo.id,todo.text)}>save</button>
                         ):(<>
-                             <button className='btn btn-success mx-2' onClick={()=>StartEdit(todo.id,todo.text)}>edit</button>
-                             <button className='btn btn-success mx-2' onClick={()=>toggleTodo(todo.id)}>{todo.done?"undo":"done"}</button>
+                             <button className='btn btn-success mx-1 my-2' onClick={()=>StartEdit(todo.id,todo.text)}>edit</button>
+                             <button className='btn btn-success mx-1 my-2' onClick={()=>toggleTodo(todo.id)}>{todo.done?"undo":"done"}</button>
                         </>)
                      }
-                  <button className='btn btn-success' onClick={()=>removeTodo(todo.id)}>Delete</button>
+                  <button className='btn btn-danger' onClick={()=>removeTodo(todo.id)}>Delete</button>
                 </li>
             ))
         }
         </div>
         {/* todolist items end */}
       </div>
+      </>
   )
 }
 
